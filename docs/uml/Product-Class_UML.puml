@@ -1,0 +1,42 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Product {
+    - id : Long
+    - name : String
+    - price : double
+    + Product()
+    + Product(name : String, price : double)
+    + Product(id : Long, name : String, price : double)
+    + getId() : Long
+    + getName() : String
+    + getPrice() : double
+    + setId(id : Long) : void
+    + setName(name : String) : void
+    + setPrice(price : double) : void
+}
+
+class ProductService {
+    - products : List<Product>
+    - nextId : Long
+    + getAllProducts() : List<Product>
+    + getProductById(id : Long) : Optional<Product>
+    + addProduct(product : Product) : Product
+    + deleteProduct(id : Long) : boolean
+    + findByName(name : String) : List<Product>
+}
+
+class ProductController {
+    - productService : ProductService
+    + getAllProducts() : List<Product>
+    + getProductById(id : Long) : Product
+    + addProduct(product : Product) : Product
+    + deleteProduct(id : Long) : void
+    + searchByName(name : String) : List<Product>
+}
+
+' ..> is a dependency: DASHED line, open arrow
+ProductController ..> ProductService : <<depends on>>
+' --> is an association: SOLID line
+ProductService --> Product : manages
+@enduml
