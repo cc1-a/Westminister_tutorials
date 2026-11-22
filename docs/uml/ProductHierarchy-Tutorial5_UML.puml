@@ -1,0 +1,45 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Product {
+- id : Long
+- name : String
+- price : double
++ {abstract} getSummary() : String
++ getName() : String
++ getPrice() : double
+}
+
+interface Discountable {
++ applyDiscount(rate : double) : void
++ getDiscountedPrice() : double
+}
+
+class DigitalProduct {
+- downloadUrl : String
+- filzeSize : double
+- discountedPrice : double
++ getSummary() : String
++ applyDiscount(rate : double) : void
++ getDiscountedPrice() : double
++ getDownloadUrl() : String
++ getFilzeSize() : double
+}
+
+class PhysicalProduct {
+- weightKg : double
+- shippingCost : double
+- discount : double
++ getSummary() : String
++ applyDiscount(rate : double) : void
++ getDiscountedPrice() : double
++ getWeightKg() : double
++ getShippingCost() : double
+}
+
+Product <|-- DigitalProduct
+Product <|-- PhysicalProduct
+
+Discountable <|.. DigitalProduct
+Discountable <|.. PhysicalProduct
+@enduml
