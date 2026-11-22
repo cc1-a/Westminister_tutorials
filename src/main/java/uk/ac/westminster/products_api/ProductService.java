@@ -9,16 +9,20 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    // In-memory list simulating a database
     private List<Product> products = new ArrayList<>();
     private Long nextId = 1L;
+
+    public ProductService() {
+        products.add(new DigitalProduct(nextId++, "Clean Code (E-book)", 29.99, "/downloads/clean-code.pdf", 4.2));
+        products.add(new PhysicalProduct(nextId++, "27-inch Monitor", 249.99, 5.4, 15.00));
+    }
 
     public List<Product> getAllProducts() {
         return products;
     }
 
     public Product addProduct(Product product) {
-        product.setId(nextId++);  // Assign current id, then increment
+        product.setId(nextId++);
         products.add(product);
         return product;
     }
